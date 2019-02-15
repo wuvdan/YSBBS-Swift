@@ -1,0 +1,6 @@
+framework module Pods_YSBBS_Swift {
+  umbrella header "Pods-YSBBS-Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}
