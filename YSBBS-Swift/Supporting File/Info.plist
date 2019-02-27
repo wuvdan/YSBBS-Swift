@@ -27,8 +27,8 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>STHeiti-Thin-1.ttf</string>
 		<string>X-细黑体.ttf</string>
+		<string>Uni Sans Regular.ttf</string>
 		<string>Patriciana.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

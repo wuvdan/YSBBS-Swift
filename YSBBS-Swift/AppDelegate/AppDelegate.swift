@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow.init(frame: kSCREEN_BOUNDS)
-        window?.rootViewController = HXNavigationController.init(rootViewController: SignInViewController())
+        let nav = HXNavigationController.init(rootViewController: LoginViewController())
+        nav.hx_barStyle = .black
+        window?.rootViewController = nav
         window?.makeKeyAndVisible()
         
         IQKeyboardManager.shared.enable = true

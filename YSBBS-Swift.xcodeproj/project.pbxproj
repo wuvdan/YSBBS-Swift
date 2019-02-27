@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		484B8E4F2223B6D1002B6E1C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484B8E4E2223B6D1002B6E1C /* UIView+Extension.swift */; };
+		484B8E512223B93D002B6E1C /* WD_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484B8E502223B93D002B6E1C /* WD_TextField.swift */; };
+		4876D322221A3AEA002BDAAF /* Uni Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4876D321221A3ACF002BDAAF /* Uni Sans Regular.ttf */; };
+		4876D324221A3E53002BDAAF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876D323221A3E53002BDAAF /* LoginViewController.swift */; };
+		4882BDD522265C030003511A /* X-细黑体.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4882BDD422265BDF0003511A /* X-细黑体.ttf */; };
+		4882BDD7222666740003511A /* Login_EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4882BDD6222666740003511A /* Login_EmailViewController.swift */; };
+		4882BDD922266C890003511A /* Login_RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4882BDD822266C890003511A /* Login_RegisterViewController.swift */; };
+		4882BDDB222670A10003511A /* Login_ForgetPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4882BDDA222670A10003511A /* Login_ForgetPwdViewController.swift */; };
+		4882BDDD222671B00003511A /* ENUMHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4882BDDC222671B00003511A /* ENUMHeader.swift */; };
+		4882BDDF222673660003511A /* Login_ChangePwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4882BDDE222673660003511A /* Login_ChangePwdViewController.swift */; };
+		4882BDE1222680CF0003511A /* WD_NoLeftView_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4882BDE0222680CF0003511A /* WD_NoLeftView_TextField.swift */; };
 		48B607792216505E0097E694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B607782216505E0097E694 /* AppDelegate.swift */; };
 		48B6077B2216505E0097E694 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B6077A2216505E0097E694 /* ViewController.swift */; };
 		48B6077E2216505E0097E694 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48B6077C2216505E0097E694 /* Main.storyboard */; };
@@ -20,13 +31,22 @@
 		48E56CE7221657B4003C0670 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E56CE6221657B4003C0670 /* Kingfisher.framework */; };
 		48E56CE9221657B4003C0670 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E56CE8221657B4003C0670 /* SnapKit.framework */; };
 		48E56CEB221657B4003C0670 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E56CEA221657B4003C0670 /* SwiftyJSON.framework */; };
-		48E56CED221661C0003C0670 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E56CEC221661C0003C0670 /* SignInViewController.swift */; };
-		48E56CEF221683F8003C0670 /* WDTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E56CEE221683F8003C0670 /* WDTextField.swift */; };
 		48E56CF222169D16003C0670 /* Patriciana.otf in Resources */ = {isa = PBXBuildFile; fileRef = 48E56CF022169CB8003C0670 /* Patriciana.otf */; };
 		EBCABCEF52440990CF189097 /* Pods_YSBBS_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B517232AA753A95BC00586D /* Pods_YSBBS_Swift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		484B8E4E2223B6D1002B6E1C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		484B8E502223B93D002B6E1C /* WD_TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WD_TextField.swift; sourceTree = "<group>"; };
+		4876D321221A3ACF002BDAAF /* Uni Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Uni Sans Regular.ttf"; sourceTree = "<group>"; };
+		4876D323221A3E53002BDAAF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4882BDD422265BDF0003511A /* X-细黑体.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "X-细黑体.ttf"; sourceTree = "<group>"; };
+		4882BDD6222666740003511A /* Login_EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login_EmailViewController.swift; sourceTree = "<group>"; };
+		4882BDD822266C890003511A /* Login_RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login_RegisterViewController.swift; sourceTree = "<group>"; };
+		4882BDDA222670A10003511A /* Login_ForgetPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login_ForgetPwdViewController.swift; sourceTree = "<group>"; };
+		4882BDDC222671B00003511A /* ENUMHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENUMHeader.swift; sourceTree = "<group>"; };
+		4882BDDE222673660003511A /* Login_ChangePwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login_ChangePwdViewController.swift; sourceTree = "<group>"; };
+		4882BDE0222680CF0003511A /* WD_NoLeftView_TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WD_NoLeftView_TextField.swift; sourceTree = "<group>"; };
 		48B607752216505E0097E694 /* YSBBS-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "YSBBS-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B607782216505E0097E694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48B6077A2216505E0097E694 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,8 +62,6 @@
 		48E56CE6221657B4003C0670 /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E56CE8221657B4003C0670 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E56CEA221657B4003C0670 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		48E56CEC221661C0003C0670 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		48E56CEE221683F8003C0670 /* WDTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDTextField.swift; sourceTree = "<group>"; };
 		48E56CF022169CB8003C0670 /* Patriciana.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Patriciana.otf; sourceTree = "<group>"; };
 		4FDBF9FA881F7D55D2D5E904 /* Pods-YSBBS-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YSBBS-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-YSBBS-Swift/Pods-YSBBS-Swift.release.xcconfig"; sourceTree = "<group>"; };
 		7B517232AA753A95BC00586D /* Pods_YSBBS_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YSBBS_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,12 +127,14 @@
 		48E56CF122169CE8003C0670 /* Supporting File */ = {
 			isa = PBXGroup;
 			children = (
+				48E56CF022169CB8003C0670 /* Patriciana.otf */,
+				4882BDD422265BDF0003511A /* X-细黑体.ttf */,
+				4876D321221A3ACF002BDAAF /* Uni Sans Regular.ttf */,
 				48B6077F2216505F0097E694 /* Assets.xcassets */,
 				48B607812216505F0097E694 /* LaunchScreen.storyboard */,
 				48B6077A2216505E0097E694 /* ViewController.swift */,
 				48B6077C2216505E0097E694 /* Main.storyboard */,
 				48B607842216505F0097E694 /* Info.plist */,
-				48E56CF022169CB8003C0670 /* Patriciana.otf */,
 			);
 			path = "Supporting File";
 			sourceTree = "<group>";
@@ -139,6 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				48B60791221650E60097E694 /* Extension.swift */,
+				4882BDDC222671B00003511A /* ENUMHeader.swift */,
+				484B8E4E2223B6D1002B6E1C /* UIView+Extension.swift */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -163,7 +185,11 @@
 		48E56CFC2216B28D003C0670 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				48E56CEC221661C0003C0670 /* SignInViewController.swift */,
+				4876D323221A3E53002BDAAF /* LoginViewController.swift */,
+				4882BDD6222666740003511A /* Login_EmailViewController.swift */,
+				4882BDD822266C890003511A /* Login_RegisterViewController.swift */,
+				4882BDDA222670A10003511A /* Login_ForgetPwdViewController.swift */,
+				4882BDDE222673660003511A /* Login_ChangePwdViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -171,7 +197,8 @@
 		48E56CFD2216B29D003C0670 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				48E56CEE221683F8003C0670 /* WDTextField.swift */,
+				484B8E502223B93D002B6E1C /* WD_TextField.swift */,
+				4882BDE0222680CF0003511A /* WD_NoLeftView_TextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -257,6 +284,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4882BDD522265C030003511A /* X-细黑体.ttf in Resources */,
+				4876D322221A3AEA002BDAAF /* Uni Sans Regular.ttf in Resources */,
 				48E56CF222169D16003C0670 /* Patriciana.otf in Resources */,
 				48B607832216505F0097E694 /* LaunchScreen.storyboard in Resources */,
 				48B607802216505F0097E694 /* Assets.xcassets in Resources */,
@@ -326,14 +355,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48E56CED221661C0003C0670 /* SignInViewController.swift in Sources */,
+				484B8E512223B93D002B6E1C /* WD_TextField.swift in Sources */,
+				4882BDD922266C890003511A /* Login_RegisterViewController.swift in Sources */,
+				484B8E4F2223B6D1002B6E1C /* UIView+Extension.swift in Sources */,
+				4882BDDB222670A10003511A /* Login_ForgetPwdViewController.swift in Sources */,
+				4882BDDD222671B00003511A /* ENUMHeader.swift in Sources */,
 				48B6078F221650910097E694 /* HXFakeNavigationBar.swift in Sources */,
+				4882BDDF222673660003511A /* Login_ChangePwdViewController.swift in Sources */,
 				48B6077B2216505E0097E694 /* ViewController.swift in Sources */,
-				48E56CEF221683F8003C0670 /* WDTextField.swift in Sources */,
 				48B6078E221650910097E694 /* UIViewController+HXNavigationBar.swift in Sources */,
 				48B60792221650E60097E694 /* Extension.swift in Sources */,
 				48B60790221650910097E694 /* HXNavigationController.swift in Sources */,
+				4876D324221A3E53002BDAAF /* LoginViewController.swift in Sources */,
 				48B607792216505E0097E694 /* AppDelegate.swift in Sources */,
+				4882BDD7222666740003511A /* Login_EmailViewController.swift in Sources */,
+				4882BDE1222680CF0003511A /* WD_NoLeftView_TextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

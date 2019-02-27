@@ -14,15 +14,20 @@ let kSCREEN_BOUNDS : CGRect = UIScreen.main.bounds
 let kSCREEN_WIDTH : CGFloat = UIScreen.main.bounds.width
 let kSCREEN_HEIGHT : CGFloat = UIScreen.main.bounds.height
 let kSCREEN_RATE_WIDTH : CGFloat = kSCREEN_WIDTH / 375.0
-let kSCREEN_RATE_HEIGHT : CGFloat = kSCREEN_WIDTH / 667.0
+let kSCREEN_RATE_HEIGHT : CGFloat = kSCREEN_HEIGHT / 667.0
 
 /// Mark - iPhoneX Adapt
 let kIS_iPhoneX : Bool = UIApplication.shared.statusBarFrame.height > 20 ? true : false
-let kStatusBarHeight : CGFloat = UIApplication.shared.statusBarFrame.height /// 状态栏高度
-let kSafeAreaBottomHeight : CGFloat = kIS_iPhoneX ? 34.0 : 0  /// 底部安全距离
-let kNavigationBarHeight : CGFloat = 44 /// 导航栏高度
-let kSafeAreaTopHeight : CGFloat = kStatusBarHeight + kNavigationBarHeight /// 顶部导航栏高度
-let kTabbarHeight : CGFloat = 49.0 /// Tabbar高度
+/// 状态栏高度
+let kStatusBarHeight : CGFloat = UIApplication.shared.statusBarFrame.height
+/// 底部安全距离
+let kSafeAreaBottomHeight : CGFloat = kIS_iPhoneX ? 34.0 : 0
+/// 导航栏高度
+let kNavigationBarHeight : CGFloat = 44
+/// 顶部导航栏高度
+let kSafeAreaTopHeight : CGFloat = kStatusBarHeight + kNavigationBarHeight
+/// Tabbar高度
+let kTabbarHeight : CGFloat = 49.0
 
 /// Mark - Color
 func kCOLOR(R: CGFloat, G: CGFloat, B: CGFloat) -> UIColor {
