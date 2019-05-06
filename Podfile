@@ -10,6 +10,13 @@ target 'YSBBS-Swift' do
   pod 'SwiftyJSON', '~> 4.0'  
   pod 'SnapKit', '~> 4.0.0'
   pod 'IQKeyboardManagerSwift'
-
+  pod 'SVProgressHUD'
+  pod 'FFToast'
+  pod 'MJRefresh'
+  pod 'JXPhotoBrowser'
+  pod 'FMDB'
+  pod 'HXPhotoPicker', '~> 2.2.9'
+  pod 'EmptyPage'
+  pod 'JXSegmentedView'
 
 end

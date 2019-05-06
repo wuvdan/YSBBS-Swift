@@ -13,7 +13,6 @@ class WD_NoLeftView_TextField: UITextField {
     var textFieldChangeHandler: ((String) -> Void)?
     var textFieldNextResponseHandler:((WD_NoLeftView_TextField) -> Void)?
 
-    
     /// 设置为占位符
     private lazy var titleLabel: UILabel = {
         let l = UILabel.init()
@@ -45,7 +44,7 @@ class WD_NoLeftView_TextField: UITextField {
         delegate = self
         leftViewMode = .always
         setupSubViews()
-        self.addTarget(self, action: #selector(textChenge(textField:)), for: .editingChanged)
+        addTarget(self, action: #selector(textChenge(textField:)), for: .editingChanged)
     }
     
     @objc func textChenge(textField:WD_NoLeftView_TextField) {

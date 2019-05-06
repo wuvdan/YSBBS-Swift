@@ -11,11 +11,10 @@ import UIKit
 class Login_ForgetPwdViewController: UIViewController {
 
     ///  E-mail
-    private lazy var emailTextField: UILabel = {
+    lazy var emailTextField: UILabel = {
         let l = UILabel.init()
         l.textColor = kMain_Color_line_dark
         l.font = UIFont.systemFont(ofSize: 15)
-        l.text = "wudan_ios@163.com"
         return l
     }()
     
@@ -30,17 +29,21 @@ class Login_ForgetPwdViewController: UIViewController {
         
     ///  Password
     private lazy var pwdTextField: WD_NoLeftView_TextField = {
-        let textField = WD_NoLeftView_TextField()
-        textField.placeholder = "密码";
-        textField.returnKeyType = .next
+        let textField               = WD_NoLeftView_TextField()
+        textField.placeholder       = "密码";
+        textField.returnKeyType     = .next
+        textField.isSecureTextEntry = true
+        textField.clearButtonMode   = .whileEditing
         return textField
     }()
     
     ///  Password again
     private lazy var pwdAgainTextField: WD_NoLeftView_TextField = {
-        let textField = WD_NoLeftView_TextField()
-        textField.placeholder = "确认密码";
-        textField.returnKeyType = .done
+        let textField               = WD_NoLeftView_TextField()
+        textField.placeholder       = "确认密码";
+        textField.returnKeyType     = .done
+        textField.isSecureTextEntry = true
+        textField.clearButtonMode   = .whileEditing
         return textField
     }()
     
@@ -51,8 +54,10 @@ class Login_ForgetPwdViewController: UIViewController {
         b.setImage(image, for: .normal)
         b.imageView!.tintColor = kMain_Color_line_dark.withAlphaComponent(0.5)
         b.currentImage?.withRenderingMode(.alwaysTemplate)
+        b.addTarget(self, action: #selector(buttonTouched(sender:)), for: .touchUpInside)
         return b
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,21 +71,62 @@ class Login_ForgetPwdViewController: UIViewController {
     }
 }
 
+@objc
+extension Login_ForgetPwdViewController {
+    
+    
+    func buttonTouched(sender: UIButton) {
+        view.endEditing(true)
+        if emailCodeTextField.text?.count == 0 {
+            HUDUtils.showWarningHUD(string: "请输入验证码")
+        } else if pwdTextField.text?.count == 0 {
+            HUDUtils.showWarningHUD(string: "请输入密码")
+        } else if (pwdTextField.text?.count)! < 6 {
+            HUDUtils.showWarningHUD(string: "密码长度不能小于6位字符")
+        } else if pwdAgainTextField.text?.count == 0 {
+            HUDUtils.showWarningHUD(string: "请再次输入密码")
+        } else if pwdAgainTextField.text != pwdTextField.text {
+            HUDUtils.showWarningHUD(string: "请两次输入的密码不同")
+        } else {
+            YSNetWorking().forgetPassword(withAccount: emailCodeTextField.text!, code: emailCodeTextField.text!, password: pwdAgainTextField.text!, successComplete: { (data) -> (Void) in
+                let code: Int = data["code"] as! Int
+                if code == 0 {
+                    HUDUtils.showSuccessHUD(string: "密码设置成功~")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    })
+                } else {
+                    HUDUtils.showErrorHUD(string: (data["msg"] as! String))
+                }
+            }) { (error) -> (Void) in
+                
+            }
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+}
+
 extension Login_ForgetPwdViewController {
     
     func blockHandler() {
         emailCodeTextField.textFieldNextResponseHandler = { [weak self] (textField:WD_NoLeftView_TextField) in
-            self!.emailCodeTextField.resignFirstResponder()
-            self!.pwdTextField.becomeFirstResponder()
+            guard let strongSelf = self else { return }
+            strongSelf.emailCodeTextField.resignFirstResponder()
+            strongSelf.pwdTextField.becomeFirstResponder()
         }
         
         pwdTextField.textFieldNextResponseHandler = { [weak self] (textField:WD_NoLeftView_TextField) in
-            self!.pwdTextField.resignFirstResponder()
-            self!.pwdAgainTextField.becomeFirstResponder()
+            guard let strongSelf = self else { return }
+            strongSelf.pwdTextField.resignFirstResponder()
+            strongSelf.pwdAgainTextField.becomeFirstResponder()
         }
         
         pwdAgainTextField.textFieldNextResponseHandler = { [weak self] (textField:WD_NoLeftView_TextField) in
-            self!.view.endEditing(true)
+            guard let strongSelf = self else { return }
+            strongSelf.view.endEditing(true)
         }
     }
     

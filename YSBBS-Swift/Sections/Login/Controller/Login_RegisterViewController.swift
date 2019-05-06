@@ -9,7 +9,6 @@
 import UIKit
 
 
-
 class Login_RegisterViewController: UIViewController {
     
     ///  E-mail
@@ -18,7 +17,6 @@ class Login_RegisterViewController: UIViewController {
         let l       = UILabel.init()
         l.textColor = kMain_Color_line_dark
         l.font      = UIFont.systemFont(ofSize: 15)
-        l.text      = "wudan_ios@163.com"
         return l
     }()
     
@@ -41,17 +39,21 @@ class Login_RegisterViewController: UIViewController {
 
     ///  Password
     private lazy var pwdTextField: WD_NoLeftView_TextField = {
-        let textField           = WD_NoLeftView_TextField()
-        textField.placeholder   = "密码";
-        textField.returnKeyType = .next
+        let textField               = WD_NoLeftView_TextField()
+        textField.placeholder       = "密码";
+        textField.isSecureTextEntry = true
+        textField.clearButtonMode   = .whileEditing
+        textField.returnKeyType     = .next
         return textField
     }()
     
     ///  Password again
     private lazy var pwdAgainTextField: WD_NoLeftView_TextField = {
-        let textField           = WD_NoLeftView_TextField()
-        textField.placeholder   = "确认密码";
-        textField.returnKeyType = .done
+        let textField               = WD_NoLeftView_TextField()
+        textField.placeholder       = "确认密码";
+        textField.isSecureTextEntry = true
+        textField.clearButtonMode   = .whileEditing
+        textField.returnKeyType     = .done
         return textField
     }()
     
@@ -62,10 +64,12 @@ class Login_RegisterViewController: UIViewController {
         b.setImage(image, for: .normal)
         b.imageView!.tintColor = kMain_Color_line_dark.withAlphaComponent(0.5)
         b.currentImage?.withRenderingMode(.alwaysTemplate)
-//        b.addTarget(self, action: #selector(buttonTouched(sender:)), for: .touchUpInside)
+        b.addTarget(self, action: #selector(buttonTouched(sender:)), for: .touchUpInside)
         return b
     }()
     
+    public var emailType: EmialType?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -78,27 +82,72 @@ class Login_RegisterViewController: UIViewController {
     }
 }
 
+@objc extension Login_RegisterViewController {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func buttonTouched(sender: UIButton) {
+        
+        if emailCodeTextField.text?.count == 0 {
+            HUDUtils.showWarningHUD(string: "请输入验证码")
+        } else if userNameTextField.text?.count == 0 {
+            HUDUtils.showWarningHUD(string: "请输入用户名")
+        } else if (userNameTextField.text?.count)! <= 6 || (userNameTextField.text?.count)! > 12 {
+            HUDUtils.showWarningHUD(string: "用户名长度在6至12个字符之间")
+        } else if pwdTextField.text?.count == 0 {
+            HUDUtils.showWarningHUD(string: "请输入密码")
+        } else if (pwdTextField.text?.count)! < 6 {
+            HUDUtils.showWarningHUD(string: "密码长度不能小于6位字符")
+        } else if pwdAgainTextField.text?.count == 0 {
+            HUDUtils.showWarningHUD(string: "请再次输入密码")
+        } else if pwdAgainTextField.text != pwdTextField.text {
+            HUDUtils.showWarningHUD(string: "两次输入的密码不同")
+        } else {
+            YSNetWorking().register(with: emailTextField.text!, code: emailCodeTextField.text!, userName: userNameTextField.text!, password: pwdAgainTextField.text!, successComplete: { (data) -> (Void) in
+                let code: Int = data["code"] as! Int
+                if code == 0 {
+                    HUDUtils.showSuccessHUD(string: "注册成功~")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    })
+                } else {
+                    HUDUtils.showErrorHUD(string: (data["msg"] as! String))
+                }
+                
+            }) { (error) -> (Void) in
+                
+            }
+        }
+    }
+}
 
 extension Login_RegisterViewController {
     
     func blockHandler() {
+
         emailCodeTextField.textFieldNextResponseHandler = { [weak self] (textField:WD_NoLeftView_TextField) in
-            self!.emailCodeTextField.resignFirstResponder()
-            self!.userNameTextField.becomeFirstResponder()
+            guard let strongSelf = self else { return }
+            strongSelf.emailCodeTextField.resignFirstResponder()
+            strongSelf.userNameTextField.becomeFirstResponder()
         }
         
         userNameTextField.textFieldNextResponseHandler = { [weak self] (textField:WD_NoLeftView_TextField) in
-            self!.userNameTextField.resignFirstResponder()
-            self!.pwdTextField.becomeFirstResponder()
+            guard let strongSelf = self else { return }
+            strongSelf.userNameTextField.resignFirstResponder()
+            strongSelf.pwdTextField.becomeFirstResponder()
         }
         
         pwdTextField.textFieldNextResponseHandler = { [weak self] (textField:WD_NoLeftView_TextField) in
-            self!.pwdTextField.resignFirstResponder()
-            self!.pwdAgainTextField.becomeFirstResponder()
+            guard let strongSelf = self else { return }
+            strongSelf.pwdTextField.resignFirstResponder()
+            strongSelf.pwdAgainTextField.becomeFirstResponder()
         }
         
         pwdAgainTextField.textFieldNextResponseHandler = { [weak self] (textField:WD_NoLeftView_TextField) in
-            self!.view.endEditing(true)
+            guard let strongSelf = self else { return }
+            strongSelf.view.endEditing(true)
         }
     }
     

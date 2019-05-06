@@ -59,7 +59,7 @@ class WD_TextField: UITextField {
         delegate = self
         leftViewMode = .always
         setupSubViews()
-        self.addTarget(self, action: #selector(textChenge(textField:)), for: .editingChanged)
+        addTarget(self, action: #selector(textChenge(textField:)), for: .editingChanged)
     }
     
     @objc func textChenge(textField:WD_TextField) {
@@ -75,13 +75,14 @@ class WD_TextField: UITextField {
 
 extension WD_TextField: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.5) {
-            self.titleLabel.snp.remakeConstraints({ (make) in
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.titleLabel.snp.remakeConstraints({ (make) in
                 make.leading.trailing.equalToSuperview()
                 make.top.equalToSuperview().inset(-20 * kSCREEN_RATE_WIDTH)
             })
-            self.titleLabel.font = UIFont.systemFont(ofSize: 10)
-            self.titleLabel.superview!.layoutIfNeeded()
+            strongSelf.titleLabel.font = UIFont.systemFont(ofSize: 10)
+            strongSelf.titleLabel.superview!.layoutIfNeeded()
         }
     }
     
@@ -90,13 +91,14 @@ extension WD_TextField: UITextFieldDelegate {
         if (self.text?.count)! > 0 {
             self.titleLabel.font = UIFont.systemFont(ofSize: 10)
         } else {
-            UIView.animate(withDuration: 0.5) {
-                self.titleLabel.snp.remakeConstraints({ (make) in
+          UIView.animate(withDuration: 0.5) { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.titleLabel.snp.remakeConstraints({ (make) in
                     make.top.bottom.trailing.equalToSuperview()
                     make.leading.equalToSuperview().inset(28 * kSCREEN_RATE_WIDTH)
                 })
-                self.titleLabel.font = UIFont.systemFont(ofSize: 15)
-                self.titleLabel.superview!.layoutIfNeeded()
+                strongSelf.titleLabel.font = UIFont.systemFont(ofSize: 15)
+                strongSelf.titleLabel.superview!.layoutIfNeeded()
             }
         }
     }

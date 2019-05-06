@@ -9,6 +9,10 @@
 
 import UIKit
 
+let kIsLogin = "isLogin"
+
+let kHeaderToken = "token"
+
 /// 验证邮箱原因
 enum EmialType {
     /// 注册

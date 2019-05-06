@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 /// Mark - Screen Property
 let kSCREEN_BOUNDS : CGRect = UIScreen.main.bounds

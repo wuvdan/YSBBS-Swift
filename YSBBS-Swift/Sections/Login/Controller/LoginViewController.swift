@@ -9,6 +9,8 @@
 import UIKit
 import SnapKit
 
+let LoginSuccessNotification = "LoginSuccess"
+
 class LoginViewController: UIViewController {
     
     /// Logo Icon
@@ -59,7 +61,7 @@ class LoginViewController: UIViewController {
         l.text          = "易社，一个专注于帖子的APP"
         l.textColor     = UIColor.lightGray
         l.textAlignment = .center
-        l.font          = UIFont.init(name: "X-细黑体", size: 12)
+        l.font          = UIFont.init(name: "Patriciana", size: 15 * UIScreen.main.bounds.width / 375.0)
         return l
     }()
     
@@ -79,7 +81,7 @@ class LoginViewController: UIViewController {
     /// Register
     private lazy var registerButton: UIButton = {
         let b              = UIButton.init(type: .custom)
-        b.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        b.titleLabel?.font = UIFont.systemFont(ofSize: 13 * UIScreen.main.bounds.width / 375.0)
         b.tag              = 11
         b.setTitle("还没有账号？", for: .normal)
         b.setTitleColor(kMain_Color_line_dark, for: .normal)
@@ -90,11 +92,23 @@ class LoginViewController: UIViewController {
     /// Forget password
     private lazy var forgetPwdbutton: UIButton = {
         let b              = UIButton.init(type: .custom)
-        b.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        b.titleLabel?.font = UIFont.systemFont(ofSize: 13 * UIScreen.main.bounds.width / 375.0)
         b.tag              = 12
         b.setTitle("忘记密码？", for: .normal)
         b.setTitleColor(kMain_Color_line_dark, for: .normal)
         b.addTarget(self, action: #selector(buttonTouched(sender:)), for: .touchUpInside)
+        return b
+    }()
+    
+    private lazy var guestButton: UIButton = {
+        let b = UIButton.init()
+        b.setTitle(" 游客访问 ", for: .normal)
+        b.setTitleColor(.black, for: .normal)
+        b.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        b.layer.cornerRadius = 3
+        b.layer.borderColor = UIColor.black.cgColor
+        b.layer.borderWidth = 0.3
+        b.addTarget(self, action: #selector(guestButtonDidtapped), for: .touchUpInside)
         return b
     }()
     
@@ -107,12 +121,17 @@ class LoginViewController: UIViewController {
         title = ""
         setupSubViews()
         blockHandler()
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: guestButton)
     }
 }
 
 // MARK: - Touch event
-@objc
-extension LoginViewController {
+@objc extension LoginViewController {
+    
+    func guestButtonDidtapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -132,37 +151,72 @@ extension LoginViewController {
     }
     
     func loginButtonTouched(sender: UIButton) {
-       navigationController?.pushViewController(Login_ChangePwdViewController(), animated: true)
+        view.endEditing(true)
+        
+        if let accountLenth = accountTextField.text {
+            if accountLenth.count == 0 {
+                HUDUtils.showWarningHUD(string: "请输入账号或者邮箱")
+                return
+            }
+        }
+        
+        if let pwdLenth = pwdTextField.text {
+            if pwdLenth.count == 0 {
+                HUDUtils.showWarningHUD(string: "请输入密码")
+                return
+            }
+        }
+        
+        YSNetWorking().login(with: accountTextField.text!, password: pwdTextField.text!, successComplete: { (data) -> (Void) in
+            if let code:Int = data["code"] as? Int {
+                if code != 0 {
+                    HUDUtils.showErrorHUD(string: (data["msg"] as! String))
+                } else {
+                    HUDUtils.showSuccessHUD(string: "登陆成功")
+                    UserDefaults.standard.set(true, forKey: kIsLogin)
+                    UserDefaults.standard.set((data["data"] as! String), forKey: kHeaderToken)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LoginSuccessNotification), object: nil, userInfo: nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: {
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }
+            }            
+        }) { (error) -> (Void) in
+            print(error)
+        }
     }
 }
-
 
 // MARK: - Set up layout
 extension LoginViewController {
     
     func blockHandler() {
         accountTextField.textFieldChangeHandler = { [weak self] (text: String, textField: WD_TextField) -> Void in
-            if text.count > 0 && (self!.pwdTextField.text?.count)! > 0 {
-                self!.loginButton.imageView!.tintColor = kMain_Color_line_dark
+            guard let strongSelf = self else { return }
+            if text.count > 0 && (strongSelf.pwdTextField.text?.count)! > 0 {
+              strongSelf.loginButton.imageView!.tintColor = kMain_Color_line_dark
             } else {
-                self!.loginButton.imageView!.tintColor = kMain_Color_line_dark.withAlphaComponent(0.5)
+              strongSelf.loginButton.imageView!.tintColor = kMain_Color_line_dark.withAlphaComponent(0.5)
             }
         }
         
         accountTextField.textFieldNextResponseHandler = {[weak self] (textField: WD_TextField) in
-            self!.accountTextField.resignFirstResponder()
-            self!.pwdTextField.becomeFirstResponder()
+            guard let strongSelf = self else { return }
+            strongSelf.accountTextField.resignFirstResponder()
+            strongSelf.pwdTextField.becomeFirstResponder()
         }
         
         pwdTextField.textFieldNextResponseHandler = {[weak self] (textField: WD_TextField) in
-            self?.view.endEditing(true)
+            guard let strongSelf = self else { return }
+            strongSelf.view.endEditing(true)
         }
         
         pwdTextField.textFieldChangeHandler = {[weak self] (text: String, textField: WD_TextField) -> Void in
+            guard let strongSelf = self else { return }
             if text.count > 0 && (self!.accountTextField.text?.count)! > 0 {
-                self!.loginButton.imageView!.tintColor = kMain_Color_line_dark
+                strongSelf.loginButton.imageView!.tintColor = kMain_Color_line_dark
             } else {
-                self!.loginButton.imageView!.tintColor = kMain_Color_line_dark.withAlphaComponent(0.5)
+                strongSelf.loginButton.imageView!.tintColor = kMain_Color_line_dark.withAlphaComponent(0.5)
             }
         }
     }
@@ -200,8 +254,7 @@ extension LoginViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(pwdTextField.snp.bottom).offset(30 * kSCREEN_RATE_HEIGHT)
         }
-        
-        
+      
         thirdLoginArray.snp.distributeViewsAlong(axisType: .horizontal,
                                                  fixedSpacing: 10 * kSCREEN_RATE_WIDTH,
                                                  leadSpacing: 15 * kSCREEN_RATE_WIDTH,

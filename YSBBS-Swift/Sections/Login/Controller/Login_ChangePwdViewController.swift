@@ -12,25 +12,31 @@ class Login_ChangePwdViewController: UIViewController {
     
     ///  Password
     private lazy var pwdOldTextField: WD_NoLeftView_TextField = {
-        let textField = WD_NoLeftView_TextField()
-        textField.placeholder = "旧密码";
-        textField.returnKeyType = .next
+        let textField               = WD_NoLeftView_TextField()
+        textField.placeholder       = "旧密码";
+        textField.returnKeyType     = .next
+        textField.isSecureTextEntry = true
+        textField.clearButtonMode   = .whileEditing
         return textField
     }()
 
     ///  Password
     private lazy var pwdTextField: WD_NoLeftView_TextField = {
-        let textField = WD_NoLeftView_TextField()
-        textField.placeholder = "密码";
-        textField.returnKeyType = .next
+        let textField               = WD_NoLeftView_TextField()
+        textField.placeholder       = "密码";
+        textField.returnKeyType     = .next
+        textField.isSecureTextEntry = true
+        textField.clearButtonMode   = .whileEditing
         return textField
     }()
     
     ///  Password again
     private lazy var pwdAgainTextField: WD_NoLeftView_TextField = {
-        let textField = WD_NoLeftView_TextField()
-        textField.placeholder = "确认密码";
-        textField.returnKeyType = .done
+        let textField               = WD_NoLeftView_TextField()
+        textField.placeholder       = "确认密码";
+        textField.returnKeyType     = .done
+        textField.isSecureTextEntry = true
+        textField.clearButtonMode   = .whileEditing
         return textField
     }()
     
@@ -47,30 +53,39 @@ class Login_ChangePwdViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        hx_backgroundColor = .clear
-        hx_shadowHidden = true
-        hx_barAlpha = 0
         title = "修改密码"
+        hx_backgroundColor = .clear
+        hx_shadowHidden = false
+        hx_barAlpha = 0
         setupSubViews()
         blockHandler()
     }
 }
 
+
+// MARK: - Touch Evevt
 extension Login_ChangePwdViewController {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
     
     func blockHandler() {
         pwdOldTextField.textFieldNextResponseHandler = { [weak self] (textField:WD_NoLeftView_TextField) in
-            self!.pwdOldTextField.resignFirstResponder()
-            self!.pwdTextField.becomeFirstResponder()
+            guard let strongSelf = self else { return }
+            strongSelf.pwdOldTextField.resignFirstResponder()
+            strongSelf.pwdTextField.becomeFirstResponder()
         }
         
         pwdTextField.textFieldNextResponseHandler = { [weak self] (textField:WD_NoLeftView_TextField) in
-            self!.pwdTextField.resignFirstResponder()
-            self!.pwdAgainTextField.becomeFirstResponder()
+            guard let strongSelf = self else { return }
+            strongSelf.pwdTextField.resignFirstResponder()
+            strongSelf.pwdAgainTextField.becomeFirstResponder()
         }
         
         pwdAgainTextField.textFieldNextResponseHandler = { [weak self] (textField:WD_NoLeftView_TextField) in
-            self!.view.endEditing(true)
+            guard let strongSelf = self else { return }
+            strongSelf.view.endEditing(true)
         }
     }
     
